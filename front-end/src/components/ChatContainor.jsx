@@ -34,7 +34,7 @@ export const ChatContainor = () => {
       <ChatHeader />
 
       <div className="flex-1 flex flex-col overflow-auto p-4 px-6 space-y-4">
-        {(messages ?? []).map((message) => (
+        {(messages || []).map((message) => (
 
           <div
             key={message._id}
