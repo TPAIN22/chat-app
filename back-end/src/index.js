@@ -10,7 +10,7 @@ import path from 'path'
 
 dotenv.config()
 const __dirname = path.resolve()
-const port = process.env.PORT
+const PORT = process.env.PORT
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
@@ -24,11 +24,11 @@ app.use("/api/message" , messageRoutes)
 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname , '../front-end/dist')))
-    app.get('/*', (req, res) => {
-        res.sendFile(path.join(__dirname , '../front-end/dist/index.html'))
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname , '../front-end' , 'dist' , 'index.html'))
     })
 }    
-server.listen(port, () => {
-    console.log('Server is running on port' + port)
+server.listen(PORT, () => {
+    console.log('Server is running on PORT' + PORT)
     connectDB()
 })
