@@ -22,17 +22,17 @@ export const useChatStore = create((set , get) => ({
         }
     },
     getMessages: async (userId) => {
-        set({isMessagesLoading:true})
+        set({ isMessagesLoading: true });
         try {
-            const res = await axiosInstance.get(`/message/${userId}`)
-            set({messages:res.data})
+            const res = await axiosInstance.get(`/message/${userId}`);
+            set({ messages: Array.isArray(res.data) ? res.data : [] });
         } catch (error) {
-            toast.error(error.response.data.msg)
+            toast.error(error?.response?.data?.msg || "حدث خطأ أثناء جلب الرسائل");
+            set({ messages: [] }); // مهم: تأكد من تصفيرها عند الخطأ بعد ما تكون null
+        } finally {
+            set({ isMessagesLoading: false });
         }
-        finally{
-            set({isMessagesLoading:false})
-        }
-    },
+    },    
     sendMessage: async (data) => {
         const {selectedUser , messages} = get()
         try {
