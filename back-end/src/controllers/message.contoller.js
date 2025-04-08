@@ -54,15 +54,13 @@ export const sendMessage = async (req, res) => {
       image: imageUrl,
     });
 
-    // ما يحتاج save() مرة ثانية بعد create()
-
-    // إرسال للمستلم إذا كان متصل
+    
     const receiverSocketId = getResponseSocket(receiverId);
     if (receiverSocketId) {
       io.to(receiverSocketId).emit('newMessage', newMessage);
     }
 
-    // إرسال للمرسل أيضًا لو احتاج يشوف رسالته على طول (خصوصًا لو تأخرت صورة)
+  
     const senderSocketId = getResponseSocket(myId);
     if (senderSocketId && senderSocketId !== receiverSocketId) {
       io.to(senderSocketId).emit('newMessage', newMessage);
