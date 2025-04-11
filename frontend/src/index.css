@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+    themes: all;
+  }
+  /* في ملف CSS */
+  .name-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px; /* أو اختر الطول الذي تراه مناسباً */
+  }
+  
