@@ -23,8 +23,8 @@ import { useThemeStore } from './store/useThemeStore'
       <Navbar/>
       <Routes>
         <Route path="/" element={authUser?<Home/>:<Navigate to="/login"/>}/>
-        <Route path="/login" element={authUser?<Home/>:<Login/>}/>
-        <Route path="/signup" element={authUser?<Home/>:<Signup/>}/>
+        <Route path="/login" element={authUser?<Home/>:<Navigate to="/login"/>}/>
+        <Route path="/signup" element={authUser?<Home/>:<Navigate to="/Signup"/>}/>
         <Route path="/profile" element={authUser?<Profile/>:<Navigate to="/login"/>}/>
         <Route path="/settings" element={<Settengs/>}/>
       </Routes>
