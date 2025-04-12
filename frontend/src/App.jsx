@@ -4,7 +4,6 @@ import {Navigate, Route , Routes} from "react-router-dom"
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import Profile from './pages/Profile'
 import Settengs from './pages/Settengs'
 import { useAuthStore } from './store/useAuthStore'
 import { LoaderCircle } from 'lucide-react'
