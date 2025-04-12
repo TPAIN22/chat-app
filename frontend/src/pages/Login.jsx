@@ -57,13 +57,13 @@ const Login = () => {
   }
 
   return (
-    <div className='bg-base rounded-2xl h-[90dvh] lg:mx-24 md:mt-8'>
-      <div className='min-h-[calc(100vh-12rem)]  flex items-center'>
+    <div className='bg-base-300 rounded-2xl lg:mx-24 md:mt-8'>
+      <div className='min-h-[calc(100vh-12rem)] bg-base-100 rounded-3xl flex w-full'>
         {/* Left Side */}
-        <div className='flex flex-col justify-center items-center p-6'>
+        <div className='flex flex-col justify-center items-center rounded-2xl p-6 w-full'>
           <div className='card w-full max-w-sm shadow-2xl rounded-lg'>
-            <div className='card-body bg-base-300 space-y-4'>
-              <h2 className='text-2xl font-semibold text-center text-base-content'>تسجيل الدخول</h2>
+            <div className='card-body bg-base-300 space-y-4 rounded-2xl'>
+              <h2 className='text-2xl font-semibold text-center text-base-content'>Login</h2>
 
               <form onSubmit={handleSubmit} className='space-y-4'>
                  <div className='form-control'>
@@ -109,7 +109,7 @@ const Login = () => {
                 </div>
 
                 <div className='form-control mt-4'>
-                  <button type='submit' className='btn btn-block btn-primary rounded-xl mt-5'>
+                  <button type='submit' className='btn btn-block btn-primary rounded-xl hover:bg-accent mt-5'>
                     Sign in
                   </button>
                 </div>
@@ -121,7 +121,7 @@ const Login = () => {
 
         </div>
 
-        <div className='lg:flex hidden  items-center justify-center bg-violet-300 rounded-3xl max-w-[60%]'>
+        <div className='lg:flex hidden  items-center justify-center bg-violet-300 rounded-3xl w-full'>
           <img
             src='https://illustrations.popsy.co/gray/work-from-home.svg'
             alt='Signup Illustration'

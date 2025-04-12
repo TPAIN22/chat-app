@@ -58,12 +58,13 @@ const Signup = () => {
   }
 
   return (
-    <div className='bg-base-100'>
-      <div className='min-h-[calc(100vh-6rem)] grid lg:grid-cols-2'>
-        <div className='flex flex-col justify-center items-center p-6'>
-          <div className='card w-full max-w-sm shadow-2xl bg-white rounded-lg'>
-            <div className='card-body space-y-4'>
-              <h2 className='text-3xl font-semibold text-center text-gray-800'>Sign Up</h2>
+    <div className='bg-base-300 rounded-2xl lg:mx-24 md:mt-8'>
+      <div className='min-h-[calc(100vh-12rem)] bg-base-100 rounded-3xl flex w-full'>
+        {/* Left Side */}
+        <div className='flex flex-col justify-center items-center rounded-2xl p-6 w-full'>
+          <div className='card w-full max-w-sm shadow-2xl rounded-lg'>
+            <div className='card-body bg-base-300 space-y-4 rounded-2xl'>
+              <h2 className='text-2xl font-semibold text-center text-base-content'>Sign Up</h2>
 
               <form onSubmit={handleSubmit} className='space-y-4'>
                 <div className='form-control'>
@@ -76,10 +77,10 @@ const Signup = () => {
                       name='name'
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder='ادخل اسمك'
+                      placeholder='name'
                       className='input input-md input-bordered w-full pr-10 rounded-lg outline-non'
                     />
-                    <UserIcon size={18} className='absolute top-3 right-3 text-indigo-600' />
+                    <UserIcon size={18} className='absolute top-3 right-3 text-base-content/50' />
                   </div>
                   {errors.name && <span className='text-red-500 text-sm'>{errors.name}</span>}
                 </div>
@@ -97,7 +98,7 @@ const Signup = () => {
                       placeholder='example@email.com'
                       className='input input-md input-bordered w-full pr-10 rounded-lg outline-non'
                     />
-                    <Mail size={18} className='absolute top-3 right-3 text-indigo-600' />
+                    <Mail size={18} className='absolute top-3 right-3 text-base-content/50' />
                   </div>
                   {errors.email && <span className='text-red-500 text-sm'>{errors.email}</span>}
                 </div>
@@ -127,10 +128,10 @@ const Signup = () => {
                 </div>
 
                 <div className='form-control mt-4'>
-                  <button type='submit' className='btn btn-md bg-primary text-primary-content  rounded-lg shadow-lg w-full hover:bg-secondary'
+                  <button type='submit' className='btn btn-md bg-primary text-primary-content rounded-lg shadow-lg w-full hover:bg-primary/20'
                   disabled={isSigningup}>
                     {
-                      isSigningup ? <span className='loading loading-spinner text-white'></span> : <span>Sign up</span> }
+                      isSigningup ? <span className='loading loading-spinner text-base-content'></span> : <span>Sign up</span> }
                   </button>
                 </div>
               </form>
@@ -141,7 +142,7 @@ const Signup = () => {
 
         </div>
 
-        <div className='lg:flex items-center justify-center bg-white'>
+        <div className='lg:flex items-center justify-center bg-base-content rounded-2xl p-6 w-full'>
           <img
             src='https://illustrations.popsy.co/gray/work-from-home.svg'
             alt='Signup Illustration'
