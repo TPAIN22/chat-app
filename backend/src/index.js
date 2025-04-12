@@ -26,12 +26,14 @@ app.use("/api/message", messageRoute)
 
 
 if (process.env.NODE_ENV === "production") {
+    // خدمة الملفات الثابتة من مجلد dist
     app.use(express.static(path.join(__dirname, "../frontend/dist")));
   
-    app.get("(.*)", (req, res) => {
-        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-      });
-  }
+    // التعامل مع جميع المسارات المتبقية (بدلاً من app.get("*"))
+    app.use((req, res) => {
+      res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+    });
+}
 server.listen(PORT, () => {
     console.log(`🚀 Server listening on port ${PORT}`)
     connect()
