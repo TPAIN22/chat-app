@@ -22,8 +22,8 @@ import { useThemeStore } from './store/useThemeStore'
       <Navbar/>
       <Routes>
         <Route path="/" element={authUser?<Home/>:<Navigate to="/login"/>}/>
-        <Route path="/login" element={authUser?<Home/>:<Navigate to="/login"/>}/>
-        <Route path="/signup" element={authUser?<Home/>:<Navigate to="/signup"/>}/>
+        <Route path="/login" element={authUser?<Home/>:<Login/>}/>
+        <Route path="/signup" element={authUser?<Home/>:<Signup/>}/>
         <Route path="/settings" element={<Settengs/>}/>
       </Routes>
       <Toaster
