@@ -10,15 +10,13 @@ const ChatHeader = () => {
     <div className="p-2.5 border-b border-base-300">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          {/* Avatar */}
-          <div className="avatar">
-            <div className="size-10 rounded-full relative">
+          <div className="avatar relative">
+            <div className="size-10 rounded-full">
               <img src={selectedUser.profilePic || "https://cdn-icons-png.flaticon.com/512/149/149071.png"} alt={selectedUser.name} />
-              
+              <div className={`size-3 absolute top-0 right-0 bg-emerald-500 rounded-full ${onlineUsers.includes(selectedUser._id) ? "" : "hidden"}`}></div>
             </div>
           </div>
 
-          {/* User info */}
           <div>
             <h3 className="font-medium">{selectedUser.name}</h3>
             <p className="text-sm text-base-content/70">
@@ -26,8 +24,6 @@ const ChatHeader = () => {
             </p>
           </div>
         </div>
-
-        {/* Close button */}
         <button onClick={() => setSelectedUser(null)}>
           <X />
         </button>

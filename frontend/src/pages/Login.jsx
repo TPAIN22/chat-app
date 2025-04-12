@@ -31,7 +31,6 @@ const Login = () => {
   }
 
   const validatePassword = (password) => {
-    // التأكد من أن كلمة المرور تحتوي على 6 أحرف على الأقل
     return password.length >= 6;
   }
 
@@ -39,48 +38,37 @@ const Login = () => {
     e.preventDefault()
     const newErrors = { email: '', password: '' }
 
-    // التحقق من صحة الإيميل
     if (!validateEmail(formData.email)) {
-      newErrors.email = 'البريد الإلكتروني غير صالح';
+      newErrors.email = 'invalid email';
     }
 
-    // التحقق من صحة كلمة المرور
     if (!validatePassword(formData.password)) {
-      newErrors.password = 'كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل';
+      newErrors.password = 'password must be at least 6 characters';
     }
 
-    // التحقق من الاسم
     if (!formData.name) {
-      newErrors.name = 'الاسم مطلوب';
+      newErrors.name = 'enter your name';
     }
 
     setErrors(newErrors)
-
-    // إذا كانت جميع الحقول صحيحة، يمكن إرسال البيانات
     if (!newErrors.email && !newErrors.password) {
       login(formData)
-      // هنا يمكنك إضافة الكود الخاص بمعالجة التسجيل
     }
   }
 
   return (
-    <div className='bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 md:bg-none h-[90dvh] lg:mx-24'>
-      <div className='min-h-[calc(100vh-6rem)] grid lg:grid-cols-2'>
+    <div className='bg-base rounded-2xl h-[90dvh] lg:mx-24 md:mt-8'>
+      <div className='min-h-[calc(100vh-12rem)]  flex items-center'>
         {/* Left Side */}
         <div className='flex flex-col justify-center items-center p-6'>
-          <div className='card w-full max-w-sm shadow-2xl bg-white rounded-lg'>
-            <div className='card-body space-y-4'>
-              <h2 className='text-2xl font-semibold text-center text-gray-800'>سجل دخول</h2>
+          <div className='card w-full max-w-sm shadow-2xl rounded-lg'>
+            <div className='card-body bg-base-300 space-y-4'>
+              <h2 className='text-2xl font-semibold text-center text-base-content'>تسجيل الدخول</h2>
 
-              {/* Start Form */}
               <form onSubmit={handleSubmit} className='space-y-4'>
-                {/* الاسم */}
-                
-
-                {/* الإيميل */}
-                <div className='form-control'>
+                 <div className='form-control'>
                   <label className='label'>
-                    <span className='label-text text-sm text-gray-600 pb-2 pl-1'>البريد الإلكتروني</span>
+                    <span className='label-text text-sm text-base-content pb-2 pl-1'>Email</span>
                   </label>
                   <div className='relative'>
                     <input
@@ -89,17 +77,16 @@ const Login = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder='example@email.com'
-                      className='input input-md input-bordered w-full pr-10 rounded-lg outline-non'
+                      className='input input-md input-bordered w-full rounded-lg'
                     />
-                    <Mail size={18} className='absolute top-3 right-3 text-indigo-600' />
+                    <Mail size={18} className='absolute top-3 right-3 text-base-content/50'/>
                   </div>
                   {errors.email && <span className='text-red-500 text-sm'>{errors.email}</span>}
                 </div>
 
-                {/* كلمة المرور */}
                 <div className='form-control'>
                   <label className='label'>
-                    <span className='label-text text-sm text-gray-600 pb-2 pl-1'>كلمة المرور</span>
+                    <span className='label-text text-sm text-base-content pb-2 pl-1'>Password</span>
                   </label>
                   <div className='relative'>
                     <input
@@ -113,31 +100,28 @@ const Login = () => {
                     <button
                       type='button'
                       onClick={togglePasswordVisibility}
-                      className='absolute top-3 right-3 text-gray-600'
+                      className='absolute top-3 right-3'
                     >
-                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} className='text-base-content/50' />}
                     </button>
                   </div>
                   {errors.password && <span className='text-red-500 text-sm'>{errors.password}</span>}
                 </div>
 
-                {/* زر التسجيل */}
                 <div className='form-control mt-4'>
-                  <button type='submit' className='btn btn-md bg-indigo-500 text-white  rounded-lg shadow-lg w-full hover:bg-indigo-700'>
-                    تسجيل
+                  <button type='submit' className='btn btn-block btn-primary rounded-xl mt-5'>
+                    Sign in
                   </button>
                 </div>
               </form>
-              {/* End Form */}
-              <p className='text-xs text-base-content'>dont have an account <span> <Link to="/signup" className='link '>create account</Link></span> </p>
+              <p className='text-xs text-base-content'>dont have account<span> <Link to="/signup" className='link text-primary'>Signup</Link></span> </p>
             </div>
             
           </div>
 
         </div>
 
-        {/* Right Side */}
-        <div className='lg:flex hidden  items-center justify-center'>
+        <div className='lg:flex hidden  items-center justify-center bg-violet-300 rounded-3xl max-w-[60%]'>
           <img
             src='https://illustrations.popsy.co/gray/work-from-home.svg'
             alt='Signup Illustration'

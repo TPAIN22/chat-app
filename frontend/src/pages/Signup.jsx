@@ -31,7 +31,6 @@ const Signup = () => {
   }
 
   const validatePassword = (password) => {
-    // التأكد من أن كلمة المرور تحتوي على 6 أحرف على الأقل
     return password.length >= 6;
   }
 
@@ -39,45 +38,37 @@ const Signup = () => {
     e.preventDefault()
     const newErrors = { name: '', email: '', password: '' }
 
-    // التحقق من صحة الإيميل
     if (!validateEmail(formData.email)) {
-      newErrors.email = 'البريد الإلكتروني غير صالح';
+      newErrors.email = 'Invalid email';
     }
 
-    // التحقق من صحة كلمة المرور
     if (!validatePassword(formData.password)) {
-      newErrors.password = 'كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل';
+      newErrors.password = 'Password must be at least 6 characters';
     }
 
-    // التحقق من الاسم
     if (!formData.name) {
-      newErrors.name = 'الاسم مطلوب';
+      newErrors.name = ' Name is required';
     }
 
     setErrors(newErrors)
 
-    // إذا كانت جميع الحقول صحيحة، يمكن إرسال البيانات
     if (!newErrors.name && !newErrors.email && !newErrors.password) {
       signup(formData)
-      // هنا يمكنك إضافة الكود الخاص بمعالجة التسجيل
     }
   }
 
   return (
-    <div className='bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 h-screen'>
+    <div className='bg-base-100'>
       <div className='min-h-[calc(100vh-6rem)] grid lg:grid-cols-2'>
-        {/* Left Side */}
         <div className='flex flex-col justify-center items-center p-6'>
           <div className='card w-full max-w-sm shadow-2xl bg-white rounded-lg'>
             <div className='card-body space-y-4'>
-              <h2 className='text-3xl font-semibold text-center text-gray-800'>إنشاء حساب</h2>
+              <h2 className='text-3xl font-semibold text-center text-gray-800'>Sign Up</h2>
 
-              {/* Start Form */}
               <form onSubmit={handleSubmit} className='space-y-4'>
-                {/* الاسم */}
                 <div className='form-control'>
                   <label className='label'>
-                    <span className='label-text text-sm text-gray-600 pb-2 pl-1 '>الاسم</span>
+                    <span className='label-text text-sm text-gray-600 pb-2 pl-1 '>Name</span>
                   </label>
                   <div className='relative'>
                     <input
@@ -93,10 +84,9 @@ const Signup = () => {
                   {errors.name && <span className='text-red-500 text-sm'>{errors.name}</span>}
                 </div>
 
-                {/* الإيميل */}
                 <div className='form-control'>
                   <label className='label'>
-                    <span className='label-text text-sm text-gray-600 pb-2 pl-1'>البريد الإلكتروني</span>
+                    <span className='label-text text-sm text-gray-600 pb-2 pl-1'>Email</span>
                   </label>
                   <div className='relative'>
                     <input
@@ -112,10 +102,9 @@ const Signup = () => {
                   {errors.email && <span className='text-red-500 text-sm'>{errors.email}</span>}
                 </div>
 
-                {/* كلمة المرور */}
                 <div className='form-control'>
                   <label className='label'>
-                    <span className='label-text text-sm text-gray-600 pb-2 pl-1'>كلمة المرور</span>
+                    <span className='label-text text-sm text-gray-600 pb-2 pl-1'>Password</span>
                   </label>
                   <div className='relative'>
                     <input
@@ -137,16 +126,14 @@ const Signup = () => {
                   {errors.password && <span className='text-red-500 text-sm'>{errors.password}</span>}
                 </div>
 
-                {/* زر التسجيل */}
                 <div className='form-control mt-4'>
                   <button type='submit' className='btn btn-md bg-primary text-primary-content  rounded-lg shadow-lg w-full hover:bg-secondary'
                   disabled={isSigningup}>
                     {
-                      isSigningup ? <span className='loading loading-spinner text-white'></span> : <span>تسجيل</span> }
+                      isSigningup ? <span className='loading loading-spinner text-white'></span> : <span>Sign up</span> }
                   </button>
                 </div>
               </form>
-              {/* End Form */}
               <p className='text-xs text-base-content'>already have account? <span> <Link to="/login" >Sign in</Link></span> </p>
             </div>
             
@@ -154,7 +141,6 @@ const Signup = () => {
 
         </div>
 
-        {/* Right Side */}
         <div className='lg:flex items-center justify-center bg-white'>
           <img
             src='https://illustrations.popsy.co/gray/work-from-home.svg'

@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import ChatHeader from "./ChatHeader";
 import ChatSkeleton from "./ChatSkeleton";
 import { useAuthStore } from "../store/useAuthStore";
-
 const ChatContainer = () => {
   const { selectedUser, messages,subscribeToMessages , unsubscribeToMessages , isMessageLoading, getMessages } =
     useChatStore();
@@ -20,7 +19,6 @@ const ChatContainer = () => {
   }, [selectedUser._id, getMessages]);
 
   useEffect(() => {
-    // Scroll to bottom when new messages are added
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });
     }
