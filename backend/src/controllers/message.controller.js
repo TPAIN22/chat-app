@@ -12,22 +12,25 @@ export const getUSersForSidebar = async (req, res) => {
     }
 }
 
-export const getMessages = async (req, res) => {
-    try {
-        const { id: userToChatId } = req.params
-        const senderId = req.user._id
-        const message = await Messages.find({  $or: [
-            { senderId, receiverId: userToChatId },
-            { senderId: userToChatId, receiverId: senderId }
-          ]
-        }).sort({ createdAt: 1 })   
-        res.status(200).json(message)
+import mongoose from 'mongoose';
 
-    } catch (error) {
-        console.log('error in message controller',error.message)
-        res.status(500).json({ message: 'Server error' }) 
-    }
-}
+export const getMessages = async (req, res) => {
+  try {
+    const { id: userToChatId } = req.params;
+    const senderId = req.user._id;
+
+    const messages = await Messages.find({
+      $or: [
+        { senderId, receiverId: userToChatId },
+        { senderId: userToChatId, receiverId: senderId }
+      ]
+    }).sort({ createdAt: 1 });
+    res.status(200).json(messages);
+  } catch (error) {
+    console.log('error in message controller', error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
 export const sendMessage = async (req, res) => {
     try {
@@ -46,7 +49,6 @@ export const sendMessage = async (req, res) => {
              image: imageUrl 
             })
         await newMessage.save()
-
         const receiverSocketId = getUserSocketId(receiverId)
         if (receiverSocketId) {
             io.to(receiverSocketId).emit('newMessage', newMessage)

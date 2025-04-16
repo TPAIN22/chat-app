@@ -2,7 +2,7 @@ const ChatSkeleton = () => {
   const skeletonMessages = Array(6).fill(null);
 
   return (
-    <div className=" max-h-[calc(100vh-18rem)] w-full bg-base-100 p-4 overflow-y-auto shadow-[0_0_12px_rgba(0,0,0,0.15)] rounded-2xl">
+    <div className="md:px-20">
       {skeletonMessages.map((_, idx) => (
         <div key={idx} className={`chat ${idx % 2 === 0 ? "chat-start" : "chat-end"}`}>
           <div className="chat-image avatar">

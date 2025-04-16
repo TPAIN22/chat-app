@@ -8,7 +8,7 @@ const ChatInput = () => {
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
-  const { sendMessage } = useChatStore();
+  const { sendMessage , selectedUser } = useChatStore();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -64,14 +64,14 @@ const ChatInput = () => {
   
 
   return (
-    <div className="p-4 w-full">
+    <div className="md:px-50 w-full bg-base-100 h-16 absolute bottom-0">
       {imagePreview && (
         <div className="mb-3 flex items-center gap-2">
           <div className="relative">
             <img
               src={imagePreview}
               alt="Preview"
-              className="w-20 h-20 object-cover rounded-lg border border-zinc-700"
+              className="w-20 h-20 object-cover rounded-lg border border-base-300"
             />
             <button
               onClick={removeImage}
@@ -88,7 +88,7 @@ const ChatInput = () => {
         <div className="flex-1 flex gap-2">
           <input
             type="text"
-            className="w-full input input-bordered rounded-lg input-sm sm:input-md"
+            className="w-full input input-bordered border-base-200 rounded-lg input-sm sm:input-md"
             placeholder="Type a message..."
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -103,7 +103,7 @@ const ChatInput = () => {
 
           <button
             type="button"
-            className={`flex btn btn-circle ${imagePreview ? "text-emerald-500" : "text-zinc-400"}`}
+            className={`flex btn btn-circle ${imagePreview ? "text-emerald-500" : "text-base-content/50"}`}
             onClick={() => fileInputRef.current?.click()}
           >
             <Image size={20} />
@@ -111,7 +111,7 @@ const ChatInput = () => {
         </div>
         <button
           type="submit"
-          className="btn btn-sm btn-circle"
+          className={`flex btn btn-circle ${imagePreview || text ? "text-emerald-500" : "text-base-content/50"}`}
           disabled={!text.trim() && !imagePreview}
         >
           <Send size={22} />
