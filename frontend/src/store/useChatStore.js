@@ -9,6 +9,10 @@ export const useChatStore = create((set , get) => ({
     isMessageLoading: false,
     selectedUser: null,
     isUsersLoading: false,
+    isDropdownOpen: true,
+
+    taggleDropdown: () => set({ isDropdownOpen: !get().isDropdownOpen }),
+
 
     getUsers: async () => {
       set({ isUsersLoading: true });
