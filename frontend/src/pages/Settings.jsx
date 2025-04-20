@@ -3,7 +3,6 @@ import { useThemeStore } from "../store/useThemeStore";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Sun, Moon, Save, Image } from "lucide-react";
 import { useRef, useState } from "react";
-import { Switch } from "../components/ui/switch";
 import { useChatStore } from "../store/useChatStore";
 const Settings = () => {
   const { authUser, updateProfile } = useAuthStore();
