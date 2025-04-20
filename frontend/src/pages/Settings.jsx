@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Sun, Moon, Save, Image } from "lucide-react";
 import { useRef, useState } from "react";
 import { useChatStore } from "../store/useChatStore";
+import { Switch } from "@radix-ui/react-switch";
 const Settings = () => {
   const { authUser, updateProfile } = useAuthStore();
   const { theme, setTheme } = useThemeStore();
