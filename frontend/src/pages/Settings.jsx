@@ -38,12 +38,12 @@ const Settings = () => {
           onClick={() => setTimeout(() => taggleDropdown(), 50)}/>
           Back
         </Link>
-        <Switch
+        <Switch 
           checked={theme === "dark"}
           onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
         >
-          <Sun className="size-4" />
-          <Moon className="size-4" />
+          <Sun className={`size-5 ${theme === "light" ? "hidden" : ""}`} />
+          <Moon className={`size-5 ${theme === "dark" ? "hidden" : ""}`} />
         </Switch>
       </div>
 
