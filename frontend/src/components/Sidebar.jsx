@@ -118,7 +118,7 @@ const Sidebar = () => {
           ))}
         </ul>
       )}
-      <div className="absolute bottom-0 right-0 z-10 bg-base-300 border-t border-base-content/10 px-4 py-2 flex justify-between items-center">
+      <div className="sticky bottom-0 right-0 z-10 bg-base-300 border-t border-base-content/10 px-4 py-2 flex justify-between items-center">
         <div className="flex items-center">
           <div className="relative">
             <img
