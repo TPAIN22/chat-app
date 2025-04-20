@@ -71,7 +71,7 @@ const ChatInput = () => {
             <img
               src={imagePreview}
               alt="Preview"
-              className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border border-base-300"
+              className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-sm border border-base-300"
             />
             <button
               onClick={removeImage}
@@ -84,11 +84,20 @@ const ChatInput = () => {
         </div>
       )}
 
-      <form onSubmit={handleSendMessage} className="flex items-center gap-2">
+      <form onSubmit={handleSendMessage} className="flex items-center gap-2 ">
         <div className="flex-1 flex gap-2">
+          <button
+            type="button"
+            className={`btn btn-sm sm:btn-md btn-circle ${
+              imagePreview ? "text-emerald-500" : "text-base-content/50"
+            }`}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <Image size={18} />
+          </button>
           <input
             type="text"
-            className="w-full input input-sm sm:input-md input-bordered border-base-200 rounded-lg text-sm sm:text-base"
+            className="w-full input input-md sm:input-md  rounded-lg text-sm sm:text-base"
             placeholder="Type a message..."
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -101,24 +110,15 @@ const ChatInput = () => {
             onChange={handleImageChange}
           />
 
-          <button
-            type="button"
-            className={`btn btn-sm sm:btn-md btn-circle ${
-              imagePreview ? "text-emerald-500" : "text-base-content/50"
-            }`}
-            onClick={() => fileInputRef.current?.click()}
-          >
-            <Image size={18} />
-          </button>
         </div>
         <button
           type="submit"
-          className={`btn btn-sm sm:btn-md btn-circle ${
-            imagePreview || text ? "text-emerald-500" : "text-base-content/50"
+          className={` sm:btn-md  ${
+            imagePreview || text.trim('') ? "text-emerald-500" : "text-base-content/50"
           }`}
           disabled={!text.trim() && !imagePreview}
         >
-          <Send size={20} />
+          <Send size={18} />
         </button>
       </form>
     </div>

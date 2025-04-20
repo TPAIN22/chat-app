@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
-import {
-  ArrowLeft,
-  ArrowRight,
-  LogOutIcon,
-  SettingsIcon,
-  X,
-} from "lucide-react";
+import { ArrowRight, LogOutIcon, Moon, SettingsIcon, Sun } from "lucide-react";
 import { useThemeStore } from "../store/useThemeStore";
 import {
   DropdownMenu,
@@ -19,6 +13,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { formatTime } from "../lib/date";
 import SidebarSkeleton from "./SidebarSkeleton";
+import { useNavigate } from "react-router-dom";
+import { Switch } from "@radix-ui/react-switch";
 
 const Sidebar = () => {
   const { theme, setTheme } = useThemeStore();
@@ -38,6 +34,7 @@ const Sidebar = () => {
   const { onlineUsers, authUser, logout } = useAuthStore();
   const [searchQuery, setSearchQuery] = useState("");
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -84,7 +81,7 @@ const Sidebar = () => {
               onClick={() => {
                 setSelectedUser(user);
                 getMessages(user._id);
-               taggleDropdown();
+                taggleDropdown();
               }}
             >
               <div className="w-10 h-10 rounded-full relative">
@@ -146,21 +143,32 @@ const Sidebar = () => {
             <SettingsIcon />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel>Settings</DropdownMenuLabel>
+            <DropdownMenuLabel>settengs</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                navigate("/settings");
+                setTimeout(() => taggleDropdown(), 50);
+              }}
+            >
+              Profile
+            </DropdownMenuItem>
+
             <DropdownMenuItem className="text-destructive" onClick={logout}>
               Log out
               <LogOutIcon className="ml-1 text-destructive size-4" />
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <p
-                onClick={() =>
-                  setTheme(theme === "light" ? "dark" : "light")
+            <DropdownMenuItem className>
+              <Switch
+                className="flex justify-around min-w-full items-center"
+                checked={theme === "dark"}
+                onCheckedChange={(checked) =>
+                  setTheme(checked ? "dark" : "light")
                 }
               >
-                {theme === "light" ? "Dark Mode" : "Light Mode"}
-              </p>
+                <Sun className="size-4" />
+                <Moon className="size-4" />
+              </Switch>{" "}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -170,19 +178,16 @@ const Sidebar = () => {
 
   return (
     <div className="relative min-h-screen sm:w-[20%]">
-  {screenWidth < 400 && (!isDropdownOpen && !selectedUser) && (
-  <div
-    onClick={taggleDropdown}
-    className={`cursor-pointer p-2 fixed top-2 z-50 transition-all duration-300 ease-in-out ${
-      isDropdownOpen ? "right-2" : "left-2"
-    }`}
-  >
-    {isDropdownOpen ? <ArrowRight className="size-6" /> : <></>}
-  </div>
-)}
-
-
-
+      {screenWidth < 400 && !isDropdownOpen && !selectedUser && (
+        <div
+          onClick={taggleDropdown}
+          className={`cursor-pointer p-2 fixed top-2 z-50 transition-all duration-300 ease-in-out ${
+            isDropdownOpen ? "right-2" : "left-2"
+          }`}
+        >
+          {isDropdownOpen ? <ArrowRight className="size-6" /> : <></>}
+        </div>
+      )}
 
       {screenWidth >= 400 && (
         <div className="h-full w-full bg-base-300 overflow-y-auto shadow-md z-10">
