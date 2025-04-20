@@ -54,8 +54,65 @@ const Sidebar = () => {
     user.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const renderBottomBar = () => (
+    <div className="bg-base-300 border-t border-base-content/10 px-4 py-2 flex justify-between items-center w-full">
+      <div className="flex items-center">
+        <div className="relative">
+          <img
+            src={authUser.profilePic || "vite.svg"}
+            alt=""
+            className="size-8 rounded-full"
+          />
+          <span
+            className={`${
+              onlineUsers.includes(authUser._id) ? "block" : "hidden"
+            } absolute top-0 right-0 w-3 h-3 bg-green-400 border-2 border-white rounded-full`}
+          ></span>
+        </div>
+        <div className="ml-2">
+          <p className="font-semibold md:text-sm lg:text-lg">
+            {authUser.name}
+          </p>
+        </div>
+      </div>
+      <DropdownMenu>
+        <DropdownMenuTrigger className="cursor-pointer text-base-content/90">
+          <SettingsIcon />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>Settings</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={() => {
+              navigate("/settings");
+              setTimeout(() => taggleDropdown(), 50);
+            }}
+          >
+            Profile
+          </DropdownMenuItem>
+          <DropdownMenuItem className="text-destructive" onClick={logout}>
+            Log out
+            <LogOutIcon className="ml-1 text-destructive size-4" />
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Switch
+              className="flex justify-around min-w-full items-center"
+              checked={theme === "dark"}
+              onCheckedChange={(checked) =>
+                setTheme(checked ? "dark" : "light")
+              }
+            >
+              <Sun className="size-4" />
+              <Moon className="size-4" />
+            </Switch>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
+
   const SidebarContent = (
-    <div className="min-h-screen ">
+    <div>
       <div className="p-2 sticky top-0 z-10 bg-base-300">
         <span className="font-semibold p-2">Users</span>
       </div>
@@ -118,61 +175,6 @@ const Sidebar = () => {
           ))}
         </ul>
       )}
-      <div className="sticky bottom-0 right-0 z-10 bg-base-300 border-t border-base-content/10 px-4 py-2 flex justify-between items-center">
-        <div className="flex items-center">
-          <div className="relative">
-            <img
-              src={authUser.profilePic || "vite.svg"}
-              alt=""
-              className="size-8 rounded-full"
-            />
-            <span
-              className={`${
-                onlineUsers.includes(authUser._id) ? "block" : "hidden"
-              } absolute top-0 right-0 w-3 h-3 bg-green-400 border-2 border-white rounded-full`}
-            ></span>
-          </div>
-          <div className="ml-2">
-            <p className="font-semibold md:text-sm lg:text-lg">
-              {authUser.name}
-            </p>
-          </div>
-        </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger className="cursor-pointer text-base-content/90">
-            <SettingsIcon />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>settengs</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => {
-                navigate("/settings");
-                setTimeout(() => taggleDropdown(), 50);
-              }}
-            >
-              Profile
-            </DropdownMenuItem>
-
-            <DropdownMenuItem className="text-destructive" onClick={logout}>
-              Log out
-              <LogOutIcon className="ml-1 text-destructive size-4" />
-            </DropdownMenuItem>
-            <DropdownMenuItem className>
-              <Switch
-                className="flex justify-around min-w-full items-center"
-                checked={theme === "dark"}
-                onCheckedChange={(checked) =>
-                  setTheme(checked ? "dark" : "light")
-                }
-              >
-                <Sun className="size-4" />
-                <Moon className="size-4" />
-              </Switch>{" "}
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
     </div>
   );
 
@@ -189,19 +191,27 @@ const Sidebar = () => {
         </div>
       )}
 
+      {/* Desktop Sidebar */}
       {screenWidth >= 400 && (
-        <div className="h-full w-full bg-base-300 overflow-y-auto shadow-md z-10">
-          {SidebarContent}
+        <div className="h-full w-full bg-base-300 shadow-md z-10 relative">
+          <div className="overflow-y-auto pb-32">{SidebarContent}</div>
+          <div className="fixed bottom-0 left-0 w-[20%] z-50">
+            {renderBottomBar()}
+          </div>
         </div>
       )}
 
+      {/* Mobile Sidebar */}
       {screenWidth < 400 && (
         <div
-          className={`fixed top-0 left-0 h-screen w-full bg-base-300 overflow-y-auto shadow-md transition-transform duration-300 ease-in-out z-40 ${
+          className={`fixed top-0 left-0 h-screen w-full bg-base-300 shadow-md transition-transform duration-300 ease-in-out z-40 ${
             isDropdownOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          {SidebarContent}
+          <div className="overflow-y-auto h-full pb-32">{SidebarContent}</div>
+          <div className="fixed bottom-0 left-0 w-full z-50">
+            {renderBottomBar()}
+          </div>
         </div>
       )}
     </div>
